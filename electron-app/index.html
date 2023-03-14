@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+    <meta http-equiv="Content-Security-Policy">
+    <title>Catalogador de Audiencias - Rama Judicial - 1.1.4</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli&display=swap"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+  </head>
+  <body>
+    <!-- 
+      <h1>Hello World - Andres Perez!</h1>
+    We are using Node.js <span id="node-version"></span>,
+    Chromium <span id="chrome-version"></span>,
+    and Electron <span id="electron-version"></span>. 
+  -->
+    <div id="main-div">
+      <section class="section-container">
+        
+        <div id="video-container">
+          <video autoplay height="100%" controls>
+            <source src="" type="video/mp4">
+          Your browser does not support the video tag.
+          </video>
+        </div>
+        
+        <div id="controls-container">
+          <header>
+            <img src="logo.png" alt="logo rama">
+            <div><h1>Catalogador de Audiencias - Rama Judicial</h1></div>
+          </header>
+          
+          <div class="form-container">
+            <div><h3>Carga Manual</h3></div>
+            <form id="myForm">
+              <input type="file" id="csvFile" accept=".csv" />
+              <input type="submit" class="normal-button" value="Cargar CSV" id="submit-button" />
+            </form>
+            <div id="message-container"><p>Carga manual - Seleccione el archivo</p></div>
+            <div class="buttons-container">
+<!--               
+              <button class="download-button" onclick="download()" title="Con esta opcion puedes descargar una copia en tu equipo del avance hasta el momento">💾 Guardar Maualmente</button>
+ -->
+              <button class="normal-button" onclick="setLocalStorage()">🔁 Restaurar Cache</button>
+              <button class="normal-button" id="security-copy-button" onclick="securityCopy()"> 💾 Copia de Seguridad</button>
+            </div>
+          </div>
+          
+          <div id="automatic-load-container">
+            <div>
+              <h3>Carga Automatica</h3>
+              <label><input type="checkbox" id="dateTimeBox"> Importar Fecha/Hora</label>
+            </div>
+            <div class="buttons-container">
+              <button class="normal-button" id="open-directory-button">Carga Automatica de Carpeta</button>
+              <button class="normal-button" id="catalogar-button">Catalogar Archivos</button>
+            </div>
+            <div id="directory-container"><p>Catalogando en:</p><input type="text" readonly="readonly" id="directory-input"></p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="container"></section>
+    </div>
+    
+    <script src="./despachos.js"></script>
+    <script src="./validateFunctions.js"></script>
+    <script src="./renderer.js"></script>
+
+  </body>
+</html>

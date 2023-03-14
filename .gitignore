@@ -1,0 +1,5 @@
+electron-app/node_modules/
+electron-app/out/
+electron-app/script.js
+electron-app/App-Catalogacion-Log.txt
+others/

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogador de Audiencias - Rama Judicial</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli&display=swap">
+
+</head>
+<body>
+
+  <section class="section-container">
+    <div id="video-container">
+      <video autoplay width="900" height="405" controls>
+        <source src="" type="video/mp4">
+      Your browser does not support the video tag.
+      </video>
+    </div>
+    <div id="controls-container">
+      <header>
+        <img src="https://www.ramajudicial.gov.co/image/layout_set_logo?img_id=21482666&t=1627220128355" alt="logo rama">
+        <div><h1>Catalogador de Audiencias - Rama Judicial</h1></div>
+      </header>
+      <div class="form-container">
+        <form id="myForm">
+          <input type="file" id="csvFile" accept=".csv" />
+          <input type="submit" value="Cargar CSV" id="submit-button" />
+        </form>
+        <div id="message-container"><p>Seleccione el archivo a cargar</p></div>
+      </div>
+      <div class="buttons-container">
+        <button class="download-button" onclick="download()">Descargar CSV</button>
+        <button class="download-button" onclick="setLocalStorage()">Cargar Cache</button>
+      </div>
+    </div>
+  </section>
+  <div id="container"></div>
+  <script src="./despachos.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>

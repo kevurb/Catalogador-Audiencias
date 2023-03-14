@@ -1,0 +1,457 @@
+/*GENERAL*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    height: 100%;
+    background-color: black;
+}
+
+body, input, textarea, button, select {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.5rem;
+    color: #d8d8d8;
+    border: none;
+}
+
+/*LOADING PAGE*/
+
+#loading-message {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+hr {
+    margin: 0 40px 0 40px ;
+}
+
+.flex {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto
+}
+    .loader {
+        border: 5px solid rgba(1 72 193);
+        border-radius: 50%;
+        border-top: 5px solid black;
+        width: 40px;
+        height: 40px;
+        -webkit-animation: spin 1s linear infinite;
+        /* Safari */
+        animation: spin 1s linear infinite;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0px;
+        bottom: 0;
+        position: fixed;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .center {
+        border: none !important;
+        text-align: center;
+    }
+
+
+/*HEADER*/
+
+header {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    color: #ececec;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 2.3rem;
+}
+
+
+h3 {
+    font-weight: 300;
+}
+
+header img {
+    height: 35px;
+    width: 35px;
+    margin-right: 20px;
+}
+
+#main-div {
+    height: 100vh;
+}
+
+/*PRIMERA SECCION*/
+.section-container {
+    height: 45vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: black;
+}
+
+video {
+    /* override other styles to make responsive */
+    width: auto !important;
+    height: 100% !important;
+  }
+
+#video-container {
+    background-color: black;
+}
+
+/* #video-container {} */
+
+#controls-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.form-container {
+    margin: 0;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.form-container #myForm {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#myForm #csvFile {
+    height: 40px;
+    border: 1px solid;
+    background-color: none;
+    margin-right: 5px;
+    border-radius: 4px;
+}
+
+#message-container {
+    display: none;
+    /*
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding-bottom: 10px; */
+}
+
+#automatic-load-container {
+    background-color: #494949;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#directory-container {
+    display: flex;
+}
+
+#directory-input {
+    padding: 0 15px;
+    background-color: #494949;
+    width: 360px;
+}
+
+/*BOTONES*/
+
+.play-button, .normal-button  {
+    color: white;
+    background-color: #03b4a3;
+    border: 2px solid #03b4a3;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.play-button:hover, .normal-button:hover {
+    background-color: #03b4a250;
+}
+
+#submit-button {
+    background-color: #303f9f;
+    border: 2px solid #303f9f;
+}
+
+#submit-button:hover {
+    background-color: #303f9f80;
+}
+
+#security-copy-button {
+    background-color: #c99629;
+    border: 2px solid #c99629;
+}
+
+#security-copy-button:hover {
+    background-color: #c9962980;
+}
+
+#catalogar-button {
+    background-color: #c06363;
+    border: 2px solid #c06363;
+}
+
+#catalogar-button:hover {
+    background-color: #c0636350;
+}
+
+/*TABLA*/
+
+#container { /*contenedor de tablas*/
+    white-space: nowrap;
+    overflow-x: scroll;
+    height: 55vh;/*580px*/
+    overflow-y: scroll;
+}
+/*
+#header-container {
+    display: table;
+}
+
+#row-container {
+    display: table;
+    height: 350px;
+    overflow: auto;
+} */
+
+.table-header  {
+    background-color: #494949;
+    text-align: left;
+}
+
+.folder-button {
+    background-color: transparent;
+}
+
+tr {
+    height: 40px;
+}
+
+td {
+    border-bottom: 3px solid rgba(255, 255, 255, 0.123);
+    padding: 0 5px;
+}
+
+
+
+tr input {
+    height: 30px;
+    background-color: transparent;
+
+}
+
+tr textarea {
+    height: 60px;
+    width: 285px;
+    background-color: transparent;
+    white-space: pre-wrap;
+    overflow: auto;
+}
+
+tr input:-ms-input-placeholder {
+    color: rgb(98, 98, 98);
+}
+
+.playin-row {
+    background:#303f9f7a;
+}
+
+/* Estilos para pagina de verificacion */
+.verify-table td {
+    white-space: nowrap;
+}
+
+.folder-link:hover {
+    color: #3122fc;
+    
+}
+
+
+
+/* CAMPOS DE LA TABLA*/
+
+input[name=Length] {
+    width: 100px;
+}
+
+input[name=Radicado] {
+    width: 230px;
+}
+
+input[name=Date]  {
+    width: 100px;
+}
+
+input[name=Time] {
+    width: 75px;
+}
+
+input[name=Organo] {
+    width: 130px;
+}
+
+input[name=Sala] {
+    width: 105px;
+}
+
+textarea[name=NewName] {
+    width: 205px;
+}
+
+input[name=Extension] {
+    width: 40px;
+}
+
+input[name=Reserved] {
+    width: 30px;
+}
+
+input[name=Virtual] {
+    width: 30px;
+}
+
+input[name=Consecutivo] {
+    width: 40px;
+}
+
+select[name=Category] {
+    border: 4px solid white;
+    border-radius: 4px;
+}
+
+input[name=NameLength] {
+    width: 40px;
+}
+
+textarea[name=FinalPath] {
+    width: 500px;
+}
+
+td input:focus {
+    color:rgb(216, 116, 255);
+    /* font-size: 1.7rem; */
+    outline: solid white 1px;
+    border-radius: 4px;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+/*TABLA DE VALIDACION DE RUTAS LARGAS*/
+#verify-table-container { /*contenedor de tablas*/
+    white-space: nowrap;
+    overflow-x: scroll;
+    height: 85vh;
+    overflow-y: scroll;
+}
+
+/*MEDIA QUERIES*/
+
+@media (max-width: 1366px) {
+
+    body, input, textarea, button, select {
+        font-size: 1.4rem;
+    }
+
+    h1 {
+        font-size: 2.1rem;
+    }
+    
+    tr textarea {
+        width: 220px;
+    }
+    /* CAMPOS DE LA TABLA*/
+    
+    input[name=Length] {
+        width: 100px;
+    }
+    
+    input[name=Radicado] {
+        width: 205px;
+    }
+    
+    input[name=Date]  {
+        width: 95px;
+    }
+    
+    input[name=Time] {
+        width: 70px;
+    }
+    
+    input[name=Organo] {
+        width: 120px;
+    }
+    
+    input[name=Sala] {
+        width: 100px;
+    }
+    
+    textarea[name=NewName] {
+        width: 191px;
+    }
+    
+    input[name=Extension] {
+        width: 40px;
+    }
+    
+    input[name=Reserved] {
+        width: 25px;
+    }
+    
+    input[name=Virtual] {
+        width: 25px;
+    }
+    
+    input[name=Consecutivo] {
+        width: 40px;
+    }
+    
+    select[name=Category] {
+        width: 120px;
+    }
+    
+    input[name=NameLength] {
+        width: 40px;
+    }
+    
+    textarea[name=FinalPath] {
+        width: 500px;
+    }
+    
+}
