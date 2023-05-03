@@ -580,10 +580,18 @@ ipcMain.on('channel2', (e, args) => {
     }
     if (args[0] == 'backup') {
         // enviar a funcion de catalogacion
-        fs.writeFileSync(dir + `\\backup.csv`, csv);
-        console.log('archivo export creado');
+        /*if (fs.existsSync(dir + `\\backup.csv`)) {
+            console.log('El archivo backup ya existe');
+            fs.writeFileSync(dir + `\\VALIDAR_BACKUP.csv`, csv);
+            console.log('archivo backup creado');
+        }*/
+        //else{
+            fs.writeFileSync(dir + `\\backup.csv`, csv);
+            console.log('archivo backup creado');
+       //}
+        
+        }
 
-    }
     if (args[0] == 'guardar') {
 
         fs.writeFileSync(dir + `\\copia-seguridad.csv`, csv);

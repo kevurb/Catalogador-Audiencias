@@ -3,7 +3,9 @@ var juzgadosLibresObject = {
     '3105': 'Laboral Circuito',
     '4003': 'Civil Municipal', 
     '3103': 'Civil Circuito',
-    '3109': 'Penal del circuito'
+    '3109': 'Penal del circuito',
+    '4105': 'Pequenas Causas Laborales'
+
 };
 
 var despachosObject = {
@@ -6027,5 +6029,13 @@ var despachosObject = {
 '990013189001': 'Juzgado 001 Promiscuo del Circuito de Puerto Carreno',
 '990014089001': 'Juzgado 001 Promiscuo Municipal de Puerto Carreno',
 '990014089002': 'Juzgado 002 Promiscuo Municipal de Puerto Carreno',
-'996244089001': 'Juzgado 001 Promiscuo Municipal de Santa Rosalia'  
+'996244089001': 'Juzgado 001 Promiscuo Municipal de Santa Rosalia', 
+'997734089001': 'Juzgado 001 Promiscuo Municipal de Cumaribo',
+'052664088003': 'Juzgado 003 Penal Municipal Con Funcion de Control de Garantías de Envigado',
+'052664088002': 'Juzgado 002 Penal Municipal Con Funcion de Control de Garantias de Envigado',
+'052664004001': 'Juzgado 001 Penal Municipal de Envigado',
+'052664004003': 'Juzgado 003 Penal Municipal de Envigado',
+'052663109002': 'Juzgado 002 Penal del Circuito con Funcion de Conocimiento de Envigado',
+'            ': 'NO REGISTRADO',
+'': 'Sin Organo',
 }

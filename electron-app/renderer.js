@@ -357,6 +357,8 @@ function dataToArray(text) {
     // creacion de evento para validar 
     checkConsecutivo ();
 
+    //VALIDAR DUPLICADOS 
+    createLengthValidation();
     
 
 };
@@ -445,9 +447,13 @@ function checkNewName () {
 
         //asignar valor a NewName
         if (fieldCategoria == "Teams" || fieldCategoria == "Historico" || fieldCategoria == "Lifesize" || fieldCategoria == "Actas") {
-            
+            if ((fieldReserved == 'R' || fieldReserved == 'L')&& (fieldVirtual=='V'||fieldVirtual=='P') ){
             rowList['NewName'].value = fieldRadicado +"_"+ fieldReserved + fieldOrgano + fieldSala +"_"+ fieldConsecutivo +"_"+ fieldDate +"_"+ fieldTime + "_" + fieldVirtual + fieldExtension;
+            }
+            else{
 
+                rowList['NewName'].value = 'REVISAR NOMBRE'+ fieldExtension;
+            }
         } else {
             
             if (fieldCategoria == "Seleccionar...") {
@@ -607,13 +613,13 @@ function setNameLengthBackgroundColor(categoryElement) {
 
 function KeyPress(e) {
     var evtobj = window.event? event : e
-    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
-        //console.log("ctrl-z pressed");
-        return false;
+    if (evtobj.ctrlKey && evtobj.keyCode == 90) {
+        console.log('ctrl-z pressed');
+        //return false;
     }
 }
 
-document.onkeydown = KeyPress;
+document.onkeydown = KeyPress ;
 
 // agregrar comandos de teclado
 
@@ -623,7 +629,8 @@ document.onkeyup = function(e) {
         focusedElement = document.activeElement;
         const inputName = focusedElement.name;
 
-        if (inputName == "Radicado" || "Date" || "Time" || "Organo" || "Sala") {
+        if (inputName == 'Radicado' || inputName == 'Date' || inputName == 'Time' || inputName == 'Organo' || inputName == 'Sala' || inputName == 'Reserved' || inputName == 'Virtual') {
+            console.log(inputName);
             let rownumber = focusedElement.className;
             referenceRowNumber = rownumber -2 ;
             if (referenceRowNumber >= 0) {
@@ -634,6 +641,34 @@ document.onkeyup = function(e) {
                 focusedElement.dispatchEvent(event);
             }
         }
+  };
+  if (e.altKey && e.key == 'ArrowDown'){
+    //console.log('columna select');
+    
+    const salaList = document.getElementsByName('Sala');
+    
+    focusedElement = document.activeElement;
+    const inputName = focusedElement.name;
+    console.log();
+    if (inputName == 'Organo' || inputName == 'Sala') {
+        //console.log(inputName);
+        let rownumber = focusedElement.className;
+        referenceRowNumber = rownumber -2 ;
+        //console.log("numero de columna",focusedElement.className);
+        arrayInputs = document.getElementsByName(inputName)
+        referenceInput = arrayInputs[referenceRowNumber].value;
+        //console.log(arrayInputs.Length);
+        for (var i=rownumber-1;i<salaList.length-1;i++){
+            
+            arrayInputs[i].value=referenceInput;
+
+            //console.log(arrayInputs[i].value);
+        
+        }
+        
+    }
+    else {
+    }
   };
 };
 

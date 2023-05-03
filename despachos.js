@@ -5968,6 +5968,8 @@ var despachosObject = {
     '052664004001': 'Juzgado 001 Penal Municipal de Envigado',
     '052664004003': 'Juzgado 003 Penal Municipal de Envigado',
     '052663109002': 'Juzgado 002 Penal del Circuito con Funcion de Conocimiento de Envigado',
+    '            ': 'NO REGISTRADO',
+    '': 'NO LLENADO',
 
     
 }

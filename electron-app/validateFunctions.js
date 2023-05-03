@@ -367,10 +367,11 @@ function createOrganoValidation() {
             } else {
                 actualInput.value = "";
             };
-
+            
             //consultar el listado de despachos y colorear correcto o incorrecto
             if (inputValue == 0) {
                 this.parentElement.style.borderBottomColor = 'rgba(255, 255, 255, 0.123)';
+                
             }else {
                 if (typeof despachosObject[inputValue] !== "undefined") {
                     this.parentElement.style.borderBottomColor = 'green';
@@ -431,12 +432,20 @@ function createSalaValidation() {
             //validar el largo y colorear correcto o incorrecto
             //console.log(inputValue);
             //console.log(inputValue.length);
+
+            const regex = /^[a-zA-Z]{3}Sala[0-9]{3}$/;
+            
             if (inputValue == "") {
                 //console.log('se restablece');
                 this.parentElement.style.borderBottomColor = 'rgba(255, 255, 255, 0.123)';
             }else {
                 if (cleanInputValue.length == 10) {
-                    this.parentElement.style.borderBottomColor = 'green';
+                    if (regex.test(cleanInputValue)) {
+                        this.parentElement.style.borderBottomColor = 'green';
+                      } else {
+                        this.parentElement.style.borderBottomColor = 'red';
+                      }
+                    
                     //goToNextInput(this);
                 } else {
                     this.parentElement.style.borderBottomColor = 'red';
@@ -459,6 +468,20 @@ function createReservadoLibreValidation() {
         actualInput.addEventListener('input', function (reservedFormat) {
             let inputValue = reservedFormat.target.value;
             actualInput.value = inputValue.toUpperCase();
+            if(actualInput.value == ''){
+                this.parentElement.style.borderBottomColor = 'rgba(255, 255, 255, 0.123)';
+
+            }
+            else {
+                if (actualInput.value == 'R' || actualInput.value == 'L' ){
+                    this.parentElement.style.borderBottomColor = 'green';
+                }
+                else{
+    
+                    this.parentElement.style.borderBottomColor = 'red';
+                }
+            } 
+            
             //checkConsecutivo ();
         });
 
@@ -478,6 +501,19 @@ const virtualInputList = document.getElementsByName('Virtual');
             let inputValue = virtualFormat.target.value;
             actualInput.value = inputValue.toUpperCase();
             //checkConsecutivo ();
+            if(actualInput.value == ''){
+                this.parentElement.style.borderBottomColor = 'rgba(255, 255, 255, 0.123)';
+
+            }
+            else {
+                if (actualInput.value == 'V' || actualInput.value == 'P' ){
+                    this.parentElement.style.borderBottomColor = 'green';
+                }
+                else{
+    
+                    this.parentElement.style.borderBottomColor = 'red';
+                }
+            } 
         });
         
         // ejecutar evento luego de crearlo
@@ -508,6 +544,8 @@ function createCategoriaValidation() {
                     case "Teams":   rowList['Sala'].value = 'TeaSala001';
                                     rowList['Virtual'].value = 'V';
                         break;
+                    case "Historico":   rowList['Virtual'].value = 'P';
+                        break;
                     
                     case "Lifesize":    rowList['Sala'].value = 'LifSala001';
                                         rowList['Virtual'].value = 'V';
@@ -529,3 +567,13 @@ function createCategoriaValidation() {
         };
     };
 
+function createLengthValidation(){
+
+    const LengthInputList = document.getElementsByName('Length');
+    console.log(':',LengthInputList.defaulValue);
+    for (var i=0; i <= LengthInputList.length;i++){
+        const Lengthactual = LengthInputList[i];
+        
+
+    }
+};

@@ -542,8 +542,8 @@ function setNameLengthBackgroundColor(categoryElement) {
 
 function KeyPress(e) {
     var evtobj = window.event? event : e
-    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
-        //console.log("ctrl-z pressed");
+    if (evtobj.keyCode == 90 && evtobj.keyCode== 17) {
+        console.log("ctrl-z pressed");
         return false;
     }
 }
