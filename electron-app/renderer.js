@@ -182,11 +182,13 @@ function dataToArray(text) {
             const cell = row[i].split('|');
             const newRecord = new record(cell[0], cell[1], cell[2], cell[3], cell[4], cell[5], cell[6], cell[7], cell[8], cell[9], cell[10], cell[11], cell[12], cell[13], cell[14], cell[15]);
             records.push(newRecord);
+            //console.log("nombres",newRecord.Name);
+            //console.log("este es",records[i]);
         };
 
     };
 
-    //console.log(records);
+    
 
     // generador de tabla HTML
     var html = '<table id="table-container">';
@@ -229,8 +231,10 @@ function dataToArray(text) {
                     <button class="folder-button" value="${records[i][j]}">📁</button>
                     </td>`;
                         break;
-
+                        
                     case "Name": html += '<td><textarea class="'+i+'" name="Name" type="text" readonly="readonly">'+ records[i][j] + '</textarea></td>';
+                        //console.log("nombres->>>>:",records[i][j]);
+                        //const nombres = records[i][j];
                         break;
 
                     case "Category": switch (records[i][j]) {
@@ -359,6 +363,9 @@ function dataToArray(text) {
 
     //VALIDAR DUPLICADOS 
     createLengthValidation();
+
+    fillDataExist();
+    
     
 
 };
@@ -426,7 +433,7 @@ function checkNewName () {
 
         const rawFieldName = rowList['Name'].value;
         const fieldName = rawFieldName.split(' >> ');
-        
+        //console.log(fieldName.length);
         const fieldCategoria = rowList['Category'].value;
 
         const rawFieldRadicado = rowList['Radicado'].value;
@@ -608,6 +615,7 @@ function setNameLengthBackgroundColor(categoryElement) {
         categoryElement.style.borderRadius = "none";
     }
 }
+
 
 // anular control-z
 

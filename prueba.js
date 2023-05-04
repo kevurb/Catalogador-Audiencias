@@ -17,3 +17,9 @@ function validarEntrada(entrada) {
   console.log(validarEntrada(entradaValida)); // true
   console.log(validarEntrada(entradaInvalida)); // false
   
+  const cadena = "AUDIENCIA DEL ARTICULO 392 DEL C.G.P. - VERBAL SUMARIO RAD. No. 13001400300920190000100 (38113)-20210519_101650";
+const expresionRegular = /\d{23}/;
+
+const resultado = cadena.match(expresionRegular);
+const valor = expresionRegular.test(cadena);
+console.log(valor);

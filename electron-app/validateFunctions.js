@@ -570,10 +570,44 @@ function createCategoriaValidation() {
 function createLengthValidation(){
 
     const LengthInputList = document.getElementsByName('Length');
-    console.log(':',LengthInputList.defaulValue);
+    //console.log(':',LengthInputList.defaulValue);
     for (var i=0; i <= LengthInputList.length;i++){
         const Lengthactual = LengthInputList[i];
-        
+        if (Lengthactual== '72'){
+
+        }
+        else{}
 
     }
 };
+function fillDataExist(){
+
+const NamesArrayList = document.getElementsByName('Name');
+for (let i=0; i<NamesArrayList.length; i++){
+        
+    const selectedClass = NamesArrayList[i].className;
+    const rowList = document.getElementsByClassName(selectedClass);
+    
+    const rawFieldName = rowList['Name'].value; 
+    const buscarradicado = /\d{23}/;
+    //console.log("nombeee-zzz<<<<>>>>>>",rawFieldName);
+    //const digitos = names.match(buscarradicado);
+    //console.log(digitos[0]);
+    //const name = rawFieldName.split(' >> ');
+    //console.log(name);
+    if (buscarradicado.test(rawFieldName) ==  true){
+
+        const radicadoNew= rawFieldName.match(buscarradicado);
+        console.log("el radicado es",radicadoNew[0]);
+       
+    }
+    else{
+        console.log("no contiene radicado");
+        const radicadoNew='xxxxxxxxxxxxxxxxxxxxxxx';
+
+    }
+    
+};
+
+
+}
