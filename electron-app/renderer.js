@@ -327,7 +327,7 @@ function dataToArray(text) {
 
     // evento que se activa al producirse un cambio en la tabla
     document.getElementById('table-container').addEventListener('change', checkConsecutivo);
-
+    document.getElementById('table-container').addEventListener('change', fillDataExist);
     //creacion de eventos para reproducir video al hacer click en el boton
     createPlayButtonAction();
 
@@ -335,7 +335,7 @@ function dataToArray(text) {
     createFolderButtonAction();
 
     //creacion de eventos para formatear el radicado
-    createRadicadoValidation();
+    //createRadicadoValidation();
 
     //creacion de eventos para formatear la fecha
     createFechaValidation();
@@ -364,12 +364,49 @@ function dataToArray(text) {
     //VALIDAR DUPLICADOS 
     createLengthValidation();
 
-    fillDataExist();
+    //fillDataExist();
     
     
 
 };
+function fillDataExist(){
 
+    const NamesArrayList = document.getElementsByName('Name');
+    const RadicadoList = document.getElementsByName('Radicado');
+    for (let i=1; i<NamesArrayList.length; i++){
+            
+        const selectedClass = NamesArrayList[i].className;
+        const rowList = document.getElementsByClassName(selectedClass);
+        const rawFieldName = rowList['Name'].value; 
+        const buscarradicado = /\d{23}/;
+    
+        const radicados = [];
+        
+        //console.log("nombeee-zzz<<<<>>>>>>",rawFieldName);
+        //const digitos = names.match(buscarradicado);
+        //console.log(digitos[0]);
+        //const name = rawFieldName.split(' >> ');
+        //console.log(name);
+        if (buscarradicado.test(rawFieldName) ==  true){
+    
+            const radicadoNew= rawFieldName.match(buscarradicado);
+            //console.log("el radicado es",radicadoNew[0]);
+           //actualRadicado.value=radicadoNew;
+            radicados.push(radicadoNew);
+        }
+        else{
+            //console.log("no contiene radicado");
+            const radicadoNew='';
+            radicados.push(radicadoNew);
+        }
+        RadicadoList[i-1].value=radicados[0];
+       
+        createRadicadoValidation();
+        
+    };
+    
+    
+    };
 
 function checkConsecutivo () {
 

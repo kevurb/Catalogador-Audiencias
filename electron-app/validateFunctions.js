@@ -83,7 +83,7 @@ function createRadicadoValidation() {
                         if (typeof despachosObject[radicadoOrgano] !== "undefined") {
                             checkOrganoRadicado = true;
                         } else {
-                            console.log('organo incorrecto');
+                            //console.log('organo incorrecto');
                         }
 
                     if (cleanInputValue.length >= 13) {
@@ -94,7 +94,7 @@ function createRadicadoValidation() {
                                 if (splittedText3 >= 2000 && splittedText3 <= currentYear) {
                                     checkAnoRadicado = true;
                                 } else {
-                                    console.log('año incorrecto');
+                                    //console.log('año incorrecto');
                                 }
 
                         if (cleanInputValue.length >= 17) {
@@ -580,40 +580,4 @@ function createLengthValidation(){
 
     }
 };
-function fillDataExist(){
 
-const NamesArrayList = document.getElementsByName('Name');
-const actualRadicadoList = document.getElementsByName('Radicado');
-for (let i=0; i<NamesArrayList.length; i++){
-        
-    const selectedClass = NamesArrayList[i].className;
-    const rowList = document.getElementsByClassName(selectedClass);
-    
-    const rawFieldName = rowList['Name'].value; 
-    const buscarradicado = /\d{23}/;
-    const actualRadicado = actualRadicadoList[i];
-    //console.log("nombeee-zzz<<<<>>>>>>",rawFieldName);
-    //const digitos = names.match(buscarradicado);
-    //console.log(digitos[0]);
-    //const name = rawFieldName.split(' >> ');
-    //console.log(name);
-    if (buscarradicado.test(rawFieldName) ==  true){
-
-        const radicadoNew= rawFieldName.match(buscarradicado);
-        //console.log("el radicado es",radicadoNew[0]);
-       actualRadicado.value=radicadoNew;
-    
-    }
-    else{
-        //console.log("no contiene radicado");
-        const radicadoNew='xxxxxxxxxxxxxxxxxxxxxxx';
-        //actualRadicado=radicadoNew;
-    }
-    console.log(actualRadicado);
-    
-
-    
-};
-
-
-}
