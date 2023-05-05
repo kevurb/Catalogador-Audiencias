@@ -23,3 +23,6 @@ const expresionRegular = /\d{23}/;
 const resultado = cadena.match(expresionRegular);
 const valor = expresionRegular.test(cadena);
 console.log(valor);
+
+
+

@@ -583,6 +583,7 @@ function createLengthValidation(){
 function fillDataExist(){
 
 const NamesArrayList = document.getElementsByName('Name');
+const actualRadicadoList = document.getElementsByName('Radicado');
 for (let i=0; i<NamesArrayList.length; i++){
         
     const selectedClass = NamesArrayList[i].className;
@@ -590,6 +591,7 @@ for (let i=0; i<NamesArrayList.length; i++){
     
     const rawFieldName = rowList['Name'].value; 
     const buscarradicado = /\d{23}/;
+    const actualRadicado = actualRadicadoList[i];
     //console.log("nombeee-zzz<<<<>>>>>>",rawFieldName);
     //const digitos = names.match(buscarradicado);
     //console.log(digitos[0]);
@@ -598,14 +600,18 @@ for (let i=0; i<NamesArrayList.length; i++){
     if (buscarradicado.test(rawFieldName) ==  true){
 
         const radicadoNew= rawFieldName.match(buscarradicado);
-        console.log("el radicado es",radicadoNew[0]);
-       
+        //console.log("el radicado es",radicadoNew[0]);
+       actualRadicado.value=radicadoNew;
+    
     }
     else{
-        console.log("no contiene radicado");
+        //console.log("no contiene radicado");
         const radicadoNew='xxxxxxxxxxxxxxxxxxxxxxx';
-
+        //actualRadicado=radicadoNew;
     }
+    console.log(actualRadicado);
+    
+
     
 };
 
