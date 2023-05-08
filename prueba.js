@@ -75,8 +75,9 @@ function fillDataExist(){
   }
 
  
-  const texto = "El reporte se generó a las_235959.";
-const hora = /_([01]\d|2[0-3])[0-5]\d[0-5]\d/;
+  const texto = "11001408801320110738000_110014088013CSJSala001_20110727_173631_1";
+const hora = /_([01]\d|2[0-3])[0-5]\d[0-5]\d_/;
 const horaEncontrada = texto.match(hora);
-
-console.log(horaEncontrada[0].substring(1)); // muestra ["_235959"]
+const horanueva = horaEncontrada[0];
+const horaR = horaEncontrada[0].replace(/_/g, "");
+console.log(horaR); // muestra ["_235959"]

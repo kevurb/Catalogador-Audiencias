@@ -60,7 +60,7 @@ function fillDataExist(){
         const buscarradicado = /\d{23}/;
         const buscarsala = /[A-Za-z]{3}Sala\d{3}/;
         const buscarfecha = /_20[0-3]\d{5}/;
-        const buscarhora = /_([01]\d|2[0-3])[0-5]\d[0-5]\d/;
+        const buscarhora = /_([01]\d|2[0-3])[0-5]\d[0-5]\d_/;
     
         const radicados = [];
         const sala =[];
@@ -103,8 +103,8 @@ function fillDataExist(){
         // VALIDA LA HORA EXISTENTE EN EL NOMBRE
         if (buscarhora.test(rawFieldName)== true){
             const HoraEncontrada = rawFieldName.match(buscarhora);
-            console.log("HORA",HoraEncontrada[0].substring(1));
-            horas.push(HoraEncontrada[0].substring(1));
+            console.log(HoraEncontrada[0].replace(/_/g, ""));
+            horas.push(HoraEncontrada[0].replace(/_/g, ""));
         }
         else{
             HoraEncontrada = '';
