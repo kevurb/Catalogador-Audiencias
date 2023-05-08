@@ -45,13 +45,62 @@ function securityBlindCopy () {
 // Canales IPC de comunicacion con el main
 
 // ENVIAR
+function fillDataExist(){
 
+    const NamesArrayList = document.getElementsByName('Name');
+    const RadicadoList = document.getElementsByName('Radicado');
+    const SalaList = document.getElementsByName('Sala');
+    for (let i=1; i<NamesArrayList.length; i++){
+            
+        const selectedClass = NamesArrayList[i].className;
+        const rowList = document.getElementsByClassName(selectedClass);
+        const rawFieldName = rowList['Name'].value; 
+        const buscarradicado = /\d{23}/;
+        const buscarsala = /[A-Za-z]{3}Sala\d{3}/;
+
+    
+        const radicados = [];
+        const sala =[];
+        console.log(buscarsala.test(rawFieldName));
+        if (buscarsala.test(rawFieldName)== true){
+            const SalaNew= rawFieldName.match(buscarsala);
+            
+            sala.push(SalaNew);
+        }
+        else{
+            const SalaNew='';
+            sala.push(SalaNew);
+        }
+        //console.log("nombeee-zzz<<<<>>>>>>",rawFieldName);
+        //const digitos = names.match(buscarradicado);
+        //console.log(digitos[0]);
+        //const name = rawFieldName.split(' >> ');
+        //console.log(name);
+        if (buscarradicado.test(rawFieldName) ==  true){
+    
+            const radicadoNew= rawFieldName.match(buscarradicado);
+            //console.log("el radicado es",radicadoNew[0]);
+           //actualRadicado.value=radicadoNew;
+            radicados.push(radicadoNew);
+        }
+        else{
+            //console.log("no contiene radicado");
+            const radicadoNew='';
+            radicados.push(radicadoNew);
+        }
+        RadicadoList[i-1].value=radicados[0];
+        SalaList[i-1].value= sala[0];
+        createRadicadoValidation();
+        createSalaValidation();
+        
+    };
+};
 // crear el canal para  enviar "abrir carpeta" al main
 document.getElementById('open-directory-button').addEventListener('click', e => {
     
     // validar si se debe importar la fecha y la hora
     const importDateTime = document.getElementById("dateTimeBox").checked;
-
+    
     const openMessage = ['abrete-sesamo', importDateTime];
     ipcRenderer.send('channel1', openMessage);
 })
@@ -327,7 +376,13 @@ function dataToArray(text) {
 
     // evento que se activa al producirse un cambio en la tabla
     document.getElementById('table-container').addEventListener('change', checkConsecutivo);
-    document.getElementById('table-container').addEventListener('change', fillDataExist);
+    const importData = document.getElementById("dataBox").checked;
+    if (importData == true){
+
+        fillDataExist();
+        //console.log("ESTA TRAYENDO LOS DATOS");
+    }
+    
     //creacion de eventos para reproducir video al hacer click en el boton
     createPlayButtonAction();
 
@@ -335,7 +390,7 @@ function dataToArray(text) {
     createFolderButtonAction();
 
     //creacion de eventos para formatear el radicado
-    //createRadicadoValidation();
+    createRadicadoValidation();
 
     //creacion de eventos para formatear la fecha
     createFechaValidation();
@@ -369,44 +424,7 @@ function dataToArray(text) {
     
 
 };
-function fillDataExist(){
 
-    const NamesArrayList = document.getElementsByName('Name');
-    const RadicadoList = document.getElementsByName('Radicado');
-    for (let i=1; i<NamesArrayList.length; i++){
-            
-        const selectedClass = NamesArrayList[i].className;
-        const rowList = document.getElementsByClassName(selectedClass);
-        const rawFieldName = rowList['Name'].value; 
-        const buscarradicado = /\d{23}/;
-    
-        const radicados = [];
-        
-        //console.log("nombeee-zzz<<<<>>>>>>",rawFieldName);
-        //const digitos = names.match(buscarradicado);
-        //console.log(digitos[0]);
-        //const name = rawFieldName.split(' >> ');
-        //console.log(name);
-        if (buscarradicado.test(rawFieldName) ==  true){
-    
-            const radicadoNew= rawFieldName.match(buscarradicado);
-            //console.log("el radicado es",radicadoNew[0]);
-           //actualRadicado.value=radicadoNew;
-            radicados.push(radicadoNew);
-        }
-        else{
-            //console.log("no contiene radicado");
-            const radicadoNew='';
-            radicados.push(radicadoNew);
-        }
-        RadicadoList[i-1].value=radicados[0];
-       
-        createRadicadoValidation();
-        
-    };
-    
-    
-    };
 
 function checkConsecutivo () {
 
@@ -492,11 +510,14 @@ function checkNewName () {
         //asignar valor a NewName
         if (fieldCategoria == "Teams" || fieldCategoria == "Historico" || fieldCategoria == "Lifesize" || fieldCategoria == "Actas") {
             if ((fieldReserved == 'R' || fieldReserved == 'L')&& (fieldVirtual=='V'||fieldVirtual=='P') ){
-            rowList['NewName'].value = fieldRadicado +"_"+ fieldReserved + fieldOrgano + fieldSala +"_"+ fieldConsecutivo +"_"+ fieldDate +"_"+ fieldTime + "_" + fieldVirtual + fieldExtension;
+                rowList['NewName'].style.backgroundColor = "black" ;
+                rowList['NewName'].value = fieldRadicado +"_"+ fieldReserved + fieldOrgano + fieldSala +"_"+ fieldConsecutivo +"_"+ fieldDate +"_"+ fieldTime + "_" + fieldVirtual + fieldExtension;
             }
             else{
-
-                rowList['NewName'].value = 'REVISAR NOMBRE'+ fieldExtension;
+                // este es NOMBRE
+                rowList['NewName'].style.backgroundColor = "red" ;
+                
+                rowList['NewName'].value = fieldRadicado +"_"+ fieldReserved + fieldOrgano + fieldSala +"_"+ fieldConsecutivo +"_"+ fieldDate +"_"+ fieldTime + "_" + fieldVirtual + fieldExtension;
             }
         } else {
             
@@ -706,11 +727,13 @@ document.onkeyup = function(e) {
         for (var i=rownumber-1;i<salaList.length-1;i++){
             
             arrayInputs[i].value=referenceInput;
-
+            createReservadoLibreValidation(); 
+            createOrganoValidation();
             //console.log(arrayInputs[i].value);
         
         }
-        
+        createSalaValidation();
+        saveDataOnLocalStorage();
     }
     else {
     }
