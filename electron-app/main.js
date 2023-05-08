@@ -345,7 +345,7 @@ async function catalogDirectoryCsv(receivedDirectory, receivedCsv) {
     
     // enviar codigo a la funcion asincrona de powershell
     const commandResult = await execShellCommand(commandPS);
-    console.log(commandResult);
+    //console.log(commandResult);
 
     // una vez terminado el script cerrar la barra de progreso
     progressBar.setCompleted();

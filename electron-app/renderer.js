@@ -50,6 +50,8 @@ function fillDataExist(){
     const NamesArrayList = document.getElementsByName('Name');
     const RadicadoList = document.getElementsByName('Radicado');
     const SalaList = document.getElementsByName('Sala');
+    const DateList = document.getElementsByName('Date');
+    const TimeList = document.getElementsByName('Time');
     for (let i=1; i<NamesArrayList.length; i++){
             
         const selectedClass = NamesArrayList[i].className;
@@ -57,11 +59,15 @@ function fillDataExist(){
         const rawFieldName = rowList['Name'].value; 
         const buscarradicado = /\d{23}/;
         const buscarsala = /[A-Za-z]{3}Sala\d{3}/;
-
+        const buscarfecha = /_20[0-3]\d{5}/;
+        const buscarhora = /_([01]\d|2[0-3])[0-5]\d[0-5]\d/;
     
         const radicados = [];
         const sala =[];
-        console.log(buscarsala.test(rawFieldName));
+        const fechas = [];
+        const horas = [];
+        //console.log(buscarfecha.test(rawFieldName));
+        // VALIDA Y TRAE LA SALA EXISTENTE EN EL NOMBRE
         if (buscarsala.test(rawFieldName)== true){
             const SalaNew= rawFieldName.match(buscarsala);
             
@@ -71,11 +77,7 @@ function fillDataExist(){
             const SalaNew='';
             sala.push(SalaNew);
         }
-        //console.log("nombeee-zzz<<<<>>>>>>",rawFieldName);
-        //const digitos = names.match(buscarradicado);
-        //console.log(digitos[0]);
-        //const name = rawFieldName.split(' >> ');
-        //console.log(name);
+        // VALIDA EL RADICADO CON 23 DIGITOS SEGUIDOS EXISTENTE EN EL NOMBRE
         if (buscarradicado.test(rawFieldName) ==  true){
     
             const radicadoNew= rawFieldName.match(buscarradicado);
@@ -88,10 +90,33 @@ function fillDataExist(){
             const radicadoNew='';
             radicados.push(radicadoNew);
         }
+        // VALIDA LA FECHA EXISTENTE EN EL NOMBRE
+        if (buscarfecha.test(rawFieldName)== true){
+            const fechaEncontrada= rawFieldName.match(buscarfecha);
+            //console.log(fechaEncontrada,"FECHA : ",fechaEncontrada[0].substring(1));
+            fechas.push(fechaEncontrada[0].substring(1));
+           
+        }else{
+            fechaNew ='';
+            fechas.push(fechaNew);
+        }
+        // VALIDA LA HORA EXISTENTE EN EL NOMBRE
+        if (buscarhora.test(rawFieldName)== true){
+            const HoraEncontrada = rawFieldName.match(buscarhora);
+            console.log("HORA",HoraEncontrada[0].substring(1));
+            horas.push(HoraEncontrada[0].substring(1));
+        }
+        else{
+            HoraEncontrada = '';
+           horas.push(HoraEncontrada);
+        }
         RadicadoList[i-1].value=radicados[0];
         SalaList[i-1].value= sala[0];
+        DateList[i-1].value = fechas[0];
+        TimeList[i-1].value = horas[0];
         createRadicadoValidation();
         createSalaValidation();
+        createFechaValidation();
         
     };
 };
