@@ -256,7 +256,8 @@ video {
 } */
 
 .table-header  {
-    background-color: #1E1E1E;
+    background-color: #141414;
+    border: #0D0D0D;
     text-align: left;
 }
 
@@ -289,6 +290,7 @@ tr textarea {
     overflow: auto;
 }
 
+
 tr input:-ms-input-placeholder {
     color: rgb(98, 98, 98);
 }
@@ -300,6 +302,7 @@ tr input:-ms-input-placeholder {
 /* Estilos para pagina de verificacion */
 .verify-table td {
     white-space: nowrap;
+    background-color: #1E1E1E;
 }
 
 .folder-link:hover {

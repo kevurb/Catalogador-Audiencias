@@ -52,6 +52,7 @@ function fillDataExist(){
     const SalaList = document.getElementsByName('Sala');
     const DateList = document.getElementsByName('Date');
     const TimeList = document.getElementsByName('Time');
+    const OrganoList = document.getElementsByName('Organo');
     for (let i=1; i<NamesArrayList.length; i++){
             
         const selectedClass = NamesArrayList[i].className;
@@ -61,11 +62,13 @@ function fillDataExist(){
         const buscarsala = /[A-Za-z]{3}Sala\d{3}/;
         const buscarfecha = /_20[0-3]\d{5}/;
         const buscarhora = /_([01]\d|2[0-3])[0-5]\d[0-5]\d_/;
+        const buscarOrgano = /_\d{12}/;
     
         const radicados = [];
         const sala =[];
         const fechas = [];
         const horas = [];
+        const organos = [];
         //console.log(buscarfecha.test(rawFieldName));
         // VALIDA Y TRAE LA SALA EXISTENTE EN EL NOMBRE
         if (buscarsala.test(rawFieldName)== true){
@@ -110,13 +113,25 @@ function fillDataExist(){
             HoraEncontrada = '';
            horas.push(HoraEncontrada);
         }
+        if (buscarOrgano.test(rawFieldName)==true){
+            const OrganoEncontrado = rawFieldName.match(buscarOrgano);
+            console.log(OrganoEncontrado);
+            organos.push(OrganoEncontrado[0].substring(1));
+        }else{
+            OrganoEncontrado = ''
+            organos.push(OrganoEncontrado);
+        }
         RadicadoList[i-1].value=radicados[0];
         SalaList[i-1].value= sala[0];
         DateList[i-1].value = fechas[0];
         TimeList[i-1].value = horas[0];
+        OrganoList[i-1].value = organos[0];
+
         createRadicadoValidation();
         createSalaValidation();
         createFechaValidation();
+        createOrganoValidation();
+
         
     };
 };
