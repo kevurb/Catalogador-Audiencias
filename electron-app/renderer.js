@@ -63,7 +63,7 @@ function fillDataExist(){
         const buscarfecha = /_20[0-3]\d{5}/;
         const buscarhora = /_([01]\d|2[0-3])[0-5]\d[0-5]\d_/;
         const buscarOrgano = /_\d{12}/;
-    
+        const buscarOrgano2 = /_[RL]\d{12}/;
         const radicados = [];
         const sala =[];
         const fechas = [];
