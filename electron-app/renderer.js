@@ -53,6 +53,8 @@ function fillDataExist(){
     const DateList = document.getElementsByName('Date');
     const TimeList = document.getElementsByName('Time');
     const OrganoList = document.getElementsByName('Organo');
+    const ReseravadoList = document.getElementsByName('Reserved');
+    const VirtualesList = document.getElementsByName('Virtual');
     for (let i=1; i<NamesArrayList.length; i++){
             
         const selectedClass = NamesArrayList[i].className;
@@ -63,13 +65,17 @@ function fillDataExist(){
         const buscarfecha = /_20[0-3]\d{5}/;
         const buscarhora = /_([01]\d|2[0-3])[0-5]\d[0-5]\d_/;
         const buscarOrgano = /_\d{12}/;
-        const buscarOrgano2 = /_[RL]\d{12}/;
+        const buscarOrgano2 = /_(R|L)\d{12}/;
+        const buscarReservado = /_(R|L)/;
+        const buscarVirtual = /_(V|P)/;
         const radicados = [];
         const sala =[];
         const fechas = [];
         const horas = [];
         const organos = [];
-        //console.log(buscarfecha.test(rawFieldName));
+        const reservados =[];
+        const Virtuales=[];
+        //console.log('ENTRA A LA FUNCION LLENAR DATOS');
         // VALIDA Y TRAE LA SALA EXISTENTE EN EL NOMBRE
         if (buscarsala.test(rawFieldName)== true){
             const SalaNew= rawFieldName.match(buscarsala);
@@ -106,31 +112,61 @@ function fillDataExist(){
         // VALIDA LA HORA EXISTENTE EN EL NOMBRE
         if (buscarhora.test(rawFieldName)== true){
             const HoraEncontrada = rawFieldName.match(buscarhora);
-            console.log(HoraEncontrada[0].replace(/_/g, ""));
+            //console.log(HoraEncontrada[0].replace(/_/g, ""));
             horas.push(HoraEncontrada[0].replace(/_/g, ""));
         }
         else{
             HoraEncontrada = '';
            horas.push(HoraEncontrada);
         }
-        if (buscarOrgano.test(rawFieldName)==true){
+        //console.log(buscarOrgano2.test(rawFieldName),'condicion',buscarOrgano.test(rawFieldName));
+        // buscar los organos existentes en la etiqueta y los importa para llenar la tabla
+        if (buscarOrgano2.test(rawFieldName)==true  && buscarOrgano.test(rawFieldName)== false  ){
+            const OrganoEncontrado = rawFieldName.match(buscarOrgano2);
+            //console.log(OrganoEncontrado[0].substring(2));
+            organos.push(OrganoEncontrado[0].substring(2));
+        }else if(buscarOrgano2.test(rawFieldName)==false  && buscarOrgano.test(rawFieldName)== true){
             const OrganoEncontrado = rawFieldName.match(buscarOrgano);
-            console.log(OrganoEncontrado);
+            ///console.log(OrganoEncontrado);
             organos.push(OrganoEncontrado[0].substring(1));
-        }else{
+        }
+        else{
             OrganoEncontrado = ''
             organos.push(OrganoEncontrado);
         }
+        //busca el valor de R O L EN LA EQUIQUETA Y LO EXPORTA EN LA TABLA
+        if (buscarReservado.test(rawFieldName)==true){
+            const ReservadoEncontrado = rawFieldName.match(buscarReservado);
+            reservados.push(ReservadoEncontrado[0].substring(1));
+            
+
+        }
+        else {  
+            ReservadoEncontrado = '';
+            reservados.push(ReservadoEncontrado);
+            createOrganoValidation();
+        }
+        //buscar y rellevar CAMPO V-P
+        if (buscarVirtual.test(rawFieldName)==true){
+            const virtualesEncontrados = rawFieldName.match(buscarVirtual);
+            Virtuales.push(virtualesEncontrados[0].substring(1));
+        }
+        else{
+            virtualesEncontrados = '';
+            Virtuales.push(virtualesEncontrados);
+            
+        }   
         RadicadoList[i-1].value=radicados[0];
         SalaList[i-1].value= sala[0];
         DateList[i-1].value = fechas[0];
         TimeList[i-1].value = horas[0];
         OrganoList[i-1].value = organos[0];
-
+        ReseravadoList[i-1].value= reservados[0];
+        VirtualesList[i-1].value = Virtuales
         createRadicadoValidation();
         createSalaValidation();
         createFechaValidation();
-        createOrganoValidation();
+        
 
         
     };
@@ -422,6 +458,10 @@ function dataToArray(text) {
         fillDataExist();
         //console.log("ESTA TRAYENDO LOS DATOS");
     }
+    else{
+
+        createOrganoValidation();
+    }
     
     //creacion de eventos para reproducir video al hacer click en el boton
     createPlayButtonAction();
@@ -439,7 +479,7 @@ function dataToArray(text) {
     createHoraValidation();
 
     //creacion de eventos para formatear el organo
-    createOrganoValidation();
+    
     
     //creacion de eventos para formatear la sala
     createSalaValidation()
