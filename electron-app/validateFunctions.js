@@ -545,6 +545,7 @@ function createCategoriaValidation() {
                                     rowList['Virtual'].value = 'V';
                         break;
                     case "Historico":   rowList['Virtual'].value = 'P';
+                       
                         break;
                     
                     case "Lifesize":    rowList['Sala'].value = 'LifSala001';
@@ -566,7 +567,50 @@ function createCategoriaValidation() {
             });
         };
     };
+function createCategoriaValidationAutoFill() {
 
+    const categoryInputList = document.getElementsByName('Category');
+    
+        for (let i=0; i<categoryInputList.length; i++) {
+            const actualInput = categoryInputList[i];
+            actualInput.addEventListener('change', function (categoryFormat) {
+                
+                console.log([actualInput]);
+                let selectClassName = actualInput.className;
+                let rowList = document.getElementsByClassName(selectClassName);
+
+                const fieldCategoria = rowList['Category'].value;
+                const fieldSala = rowList['Sala'].value;
+                //console.log('cuandooooooooooo',fieldSala)
+                // colocar valores fijos al campo de sala y virtual/reservado
+
+                switch (fieldCategoria) {
+                    case "Teams":   rowList['Sala'].value = 'TeaSala001';
+                                    rowList['Virtual'].value = 'V';
+                        break;
+                    case "Historico":   rowList['Virtual'].value = 'P';
+                                        rowList['Sala'].value = fieldSala;
+                        break;
+                    
+                    case "Lifesize":    rowList['Sala'].value = 'LifSala001';
+                                        rowList['Virtual'].value = 'V';
+                        break;
+                
+                    default:    if (rowList['Sala'].value != 'TeaSala001' || rowList['Sala'].value != 'LifSala001') {
+                        rowList['Sala'].value = '';
+                         rowList['Virtual'].value = '';
+                    };
+                        break;
+                }
+
+                // ejecutar evento de validacion en el campo sala
+                
+                const fieldEvent = new Event('input');
+                rowList['Sala'].dispatchEvent(fieldEvent); 
+
+            });
+        };
+    };
 function createLengthValidation(){
 
     const LengthInputList = document.getElementsByName('Length');

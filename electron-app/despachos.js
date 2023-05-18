@@ -6039,7 +6039,7 @@ var despachosObject = {
 '            ': 'NO REGISTRADO',
 '': 'Sin Organo',
 // disciplinarios 16052023
-'50011102002' : 'Despacho 002 de la Sala Jurisdiccional Disciplinaria de Antioquia',
+'050011102002' : 'Despacho 002 de la Sala Jurisdiccional Disciplinaria de Antioquia',
 '050011102001' : 'Despacho 001 de la Sala Jurisdiccional Disciplinaria de Antioquia',
 '050011102003' : 'Despacho 003 de la Sala Jurisdiccional Disciplinaria de Antioquia',
 '050011102004' : 'Despacho 004 de la Sala Jurisdiccional Disciplinaria del Consejo Seccional de Antioquia',

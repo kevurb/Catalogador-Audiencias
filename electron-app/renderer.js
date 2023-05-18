@@ -166,8 +166,13 @@ function fillDataExist(){
         createRadicadoValidation();
         createSalaValidation();
         createFechaValidation();
-        
-
+        createCategoriaValidationAutoFill();
+        checkConsecutivo();
+        //creacion de eventos para formatear el campo reservado-libre
+        createReservadoLibreValidation();
+    
+        //creacion de eventos para formatear el campo virtual-preencial
+        createVirtualPresencialValidation();
         
     };
 };
@@ -461,6 +466,7 @@ function dataToArray(text) {
     else{
 
         createOrganoValidation();
+        createCategoriaValidation();
     }
     
     //creacion de eventos para reproducir video al hacer click en el boton
@@ -477,9 +483,6 @@ function dataToArray(text) {
 
     //creacion de eventos para formatear la hora
     createHoraValidation();
-
-    //creacion de eventos para formatear el organo
-    
     
     //creacion de eventos para formatear la sala
     createSalaValidation()
@@ -491,7 +494,8 @@ function dataToArray(text) {
     createVirtualPresencialValidation();
 
     //creacion de eventos al asignar categoria
-    createCategoriaValidation();
+    
+    checkNewName();
 
     // creacion de evento para validar 
     checkConsecutivo ();
@@ -586,23 +590,25 @@ function checkNewName () {
         const fieldExtension = rowList['Extension'].value.toLowerCase();
         const fieldReserved = rowList['Reserved'].value;
         const fieldVirtual = rowList['Virtual'].value;
+        
 
         //asignar valor a NewName
         if (fieldCategoria == "Teams" || fieldCategoria == "Historico" || fieldCategoria == "Lifesize" || fieldCategoria == "Actas") {
-            if ((fieldReserved == 'R' || fieldReserved == 'L')&& (fieldVirtual=='V'||fieldVirtual=='P') ){
-                rowList['NewName'].style.backgroundColor = "black" ;
+                //rowList['NewName'].style.backgroundColor = "red" ;
+            if ((fieldOrgano != '' && fieldRadicado != '' && fieldDate != '' && fieldSala !='' && fieldTime !='') && (fieldReserved == 'R' || fieldReserved == 'L')&& (fieldVirtual=='V'||fieldVirtual=='P') ){
+                rowList['NewName'].style.backgroundColor = '#1E1E1E' ;
                 rowList['NewName'].value = fieldRadicado +"_"+ fieldReserved + fieldOrgano + fieldSala +"_"+ fieldConsecutivo +"_"+ fieldDate +"_"+ fieldTime + "_" + fieldVirtual + fieldExtension;
             }
             else{
                 // este es NOMBRE
                 rowList['NewName'].style.backgroundColor = "red" ;
-                
                 rowList['NewName'].value = fieldRadicado +"_"+ fieldReserved + fieldOrgano + fieldSala +"_"+ fieldConsecutivo +"_"+ fieldDate +"_"+ fieldTime + "_" + fieldVirtual + fieldExtension;
             }
         } else {
             
             if (fieldCategoria == "Seleccionar...") {
                 rowList['NewName'].value = '';
+                //rowList['NewName'].style.backgroundColor = "red" ;
             } else {
                 rowList['NewName'].value = fieldName[0];
                 }
