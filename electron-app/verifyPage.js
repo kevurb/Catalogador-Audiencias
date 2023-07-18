@@ -10,7 +10,7 @@ function createVerifyTable (array) {
   
   let html = '<table id="table-container" class="verify-table">';
       html += '<thead id="header-container"><tr>';
-      html += '<th class="table-header"></th>';
+      html += '<th class="table-header">Estado</th>';
       html += '<th class="table-header">Tamaño</th>';
       html += '<th class="table-header">Nombre</th>';
       html += '<th class="table-header">Info</th>';
