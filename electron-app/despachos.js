@@ -67,7 +67,6 @@ var juzgadosLibresObject = {
     '4003': 'Civil Municipal', 
     '4023': 'Civil Mun',
     '4053': 'Civil mun',
-    '4089': '',
     '4105': 'Pequenas Causas Laborales',
     '4303': 'Civil Municipal',
     '9800':'Escuela Judicial Rodrigo Lara Bonilla',
