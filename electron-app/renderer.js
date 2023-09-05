@@ -173,6 +173,7 @@ function fillDataExist(){
     
         //creacion de eventos para formatear el campo virtual-preencial
         createVirtualPresencialValidation();
+        validarDuplicados();
         
     };
 };
@@ -505,6 +506,7 @@ function dataToArray(text) {
 
     //fillDataExist();
     
+    validarDuplicados();
     
 
 };
@@ -667,6 +669,29 @@ function checkNewName () {
     saveDataOnLocalStorage();
     securityBlindCopy();
 };
+
+function validarDuplicados(){
+    const pesos = document.getElementsByName("Length");
+    
+    for (let i=1; i< pesos.length;i++){
+        const selectedClass = pesos[i].className;
+        const rowList = document.getElementsByClassName(selectedClass);
+        //console.log("el peso es_",pesos[i].value);
+         
+        if (pesos[i].value==pesos[i-1].value){
+            console.log("duplicado",rowList);
+            
+            rowList['Length'].style.backgroundColor = 'red' ;
+            rowList['Length'].border = "4px solid #388e3c";
+            rowList['Length'].style.borderRadius = "4px";
+           // this.parentElement.style.borderBottomColor = 'blue';
+        } 
+        else{
+           
+        }
+    }
+    
+}
 
 
 

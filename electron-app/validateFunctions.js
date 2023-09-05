@@ -109,7 +109,7 @@ function createRadicadoValidation() {
                                         if (cleanInputValue.length == 23) {
                                             checkLargoRadicado = true;
                                         } else {
-                                            console.log('largo incorrecto');
+                                            //console.log('largo incorrecto');
                                         }
                             };
                         };
@@ -218,7 +218,7 @@ function createFechaValidation() {
                                     if (cleanInputValue.length == 8) {
                                         checkLargoRadicado = true;
                                     } else {
-                                        console.log('largo incorrecto');
+                                        //console.log('largo incorrecto');
                                     }
 /*
                                     // si la fecha es futura corregir a la fecha actual
@@ -318,7 +318,7 @@ function createHoraValidation(){
                                 if (cleanInputValue.length == 6) {
                                     checkLargoRadicado = true;
                                 } else {
-                                    console.log('largo incorrecto');
+                                    //console.log('largo incorrecto');
                                 }
                     };
                 };
@@ -531,7 +531,7 @@ function createCategoriaValidation() {
             const actualInput = categoryInputList[i];
             actualInput.addEventListener('change', function (categoryFormat) {
                 
-                console.log([actualInput]);
+                //console.log([actualInput]);
                 let selectClassName = actualInput.className;
                 let rowList = document.getElementsByClassName(selectClassName);
 
@@ -563,7 +563,7 @@ function createCategoriaValidation() {
                 
                 const fieldEvent = new Event('input');
                 rowList['Sala'].dispatchEvent(fieldEvent); 
-
+                
             });
         };
     };
@@ -575,7 +575,7 @@ function createCategoriaValidationAutoFill() {
             const actualInput = categoryInputList[i];
             actualInput.addEventListener('change', function (categoryFormat) {
                 
-                console.log([actualInput]);
+                //console.log([actualInput]);
                 let selectClassName = actualInput.className;
                 let rowList = document.getElementsByClassName(selectClassName);
 
@@ -624,4 +624,3 @@ function createLengthValidation(){
 
     }
 };
-
