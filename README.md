@@ -7,9 +7,11 @@ This proyect is an *electron app* for:
 * Add Court process number, date, hour, and tipe of origin (lifesize, teams, Presencial Hearings)
 * Generate alerts on wrong data input
 * Automatically rename the file and order folders by type and Court
-* AutoFill data 
+* AutoFill data
+* Detection of duplicates files
 
-![imagen](https://user-images.githubusercontent.com/68616152/189502650-4de09ab0-bffb-4985-b4ae-d904bbcb8120.png)
+![image](https://github.com/kevurb/Catalogador-Audiencias/assets/50429980/4fcc23e8-be78-4e28-95bf-cabe9205dcb9)
+
 
 # Tech Stack
 
