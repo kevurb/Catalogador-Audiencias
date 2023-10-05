@@ -1,0 +1,38 @@
+*{
+    background-color: #1e1e1e;
+
+}
+.table-header  {
+    
+    border-color: #d8d8d8;
+    text-align: left;
+}
+tr {
+    height: 40px;
+    
+}
+
+td {
+    border-bottom: 3px solid rgba(255, 255, 255, 0.986);
+    padding: 0 1px;
+    border-color: #d8d8d8;
+    width: 10px;
+}
+body, input, textarea, button, select {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.5rem;
+    color: #d8d8d8;
+    border: none;
+}
+.verify-table td {
+    white-space: nowrap;
+    background-color: #1E1E1E;
+    border-color: #d8d8d8;
+
+}
+
+.folder-link:hover {
+    color: #3122fc;
+    
+}
+

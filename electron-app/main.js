@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const { verify } = require('crypto');
 const ProgressBar = require('electron-progressbar');
-const { Console } = require('console');
+const { Console, log } = require('console');
 
 
 
@@ -124,10 +124,6 @@ function manualUpdate () {
         
     }
 }
-
-
-
-
 // --------------------   FUNCIONES --------------------------------------
 
 // funcion asincrona para ejecutar comandos de powershell
@@ -143,8 +139,6 @@ function manualUpdate () {
      });
     });
    }
-
-
 //verificar directorio (alarma si hay valores mas largos que 260 char)
 function verifyDirectory(receivedDirectory) {
 
@@ -227,7 +221,6 @@ function verifyDirectory(receivedDirectory) {
 
     }
 }
-
 // crear directorio powershell
 function createDirectoryCsv(receivedDirectory, importDateTime) {
     
@@ -260,13 +253,8 @@ function createDirectoryCsv(receivedDirectory, importDateTime) {
 
             Start-Transcript -Append -Path "${__dirname}\\App-Catalogacion-Log.txt" 
 
-<<<<<<< HEAD
             Get-ChildItem -LiteralPath "${receivedDirectory}" -Exclude directory.csv -Attributes !Directory -Recurse . | 
             Sort-Object fullname | Select-Object FullName, ${nameVal}, Category, Radicado, ${dateVal}, ${timeVal}, Organo, Sala, Reserved, Virtual, Consecutivo, NewName, NameLength, Extension, Length, FinalPath | 
-=======
-            Get-ChildItem -LiteralPath "${receivedDirectory}"  -Attributes !Directory -Recurse |
-            Sort-Object -Property {$_.LastWriteTime} | Select-Object FullName, ${nameVal}, Category, Radicado, ${dateVal}, ${timeVal}, Organo, Sala, Reserved, Virtual, Consecutivo, NewName, NameLength, Extension, Length, FinalPath | 
->>>>>>> c1497b70af5f71347d77f231cb950699e6c2c85a
             Export-Csv -Force -Delimiter '|' -Encoding UTF8 -LiteralPath "${receivedDirectory}\\directory.csv"
             
         `, {'shell':'powershell.exe'}, (error, stdout, stderr) => {
@@ -407,8 +395,6 @@ async function catalogDirectoryCsv(receivedDirectory, receivedCsv) {
         });
     }) 
 }; 
-
-
 // enviar archivo csv al renderer 
 function sendCsvFile (receivedEvent, receivedDirectory) {
 
@@ -425,11 +411,6 @@ function sendCsvFile (receivedEvent, receivedDirectory) {
       });
 
 };
-
-
-
-
-
 // -------------------------   PROCESOS DE ELECTRON ------------------------------
 
 // funcion para crear una nueva ventana
@@ -666,4 +647,49 @@ ipcMain.on('channel6', (e, args) => {
     let filteredDir = dir.replace("\\\\?\\", '')
     //abrir elemento en carpeta
     shell.showItemInFolder(filteredDir);
+}) 
+
+
+ipcMain.on('channel7', (e,args) => {
+    
+    const duplicados = args[1]
+    const alertMessage = args[0];
+    
+    //abrir alerta
+    dialog.showMessageBox({
+        type: 'info',
+        buttons: ['Ver Duplicados'],
+        title: 'Existen Archivos Duplicados',
+        message: alertMessage
+    }).then(result => {
+       if (result.response== 0 ){
+
+
+        const verifyPage = new BrowserWindow({ 
+            width: 800, 
+            height: 500, 
+            autoHideMenuBar: true,
+            //transparent: true, 
+            //frame: false, 
+            alwaysOnTop: false,
+            webPreferences: {
+                //preload: path.join(__dirname, 'preload.js'), 
+                nodeIntegration: true,
+                contextIsolation: false
+            }
+          });
+          
+        // cargar la pagina
+        verifyPage.loadFile('verify-page-duplicates.html');
+        verifyPage.center();
+
+        // funcion para enviar el objeto que contiene la lista a la ventana
+        verifyPage.webContents.on('did-finish-load', () => {
+            verifyPage.webContents.send('channel5', duplicados);    
+        })
+
+        
+
+       }
+    });
 }) 

@@ -1,5 +1,4 @@
-
-const {ipcRenderer} = require('electron');
+const {ipcRenderer,BrowserWindow, dialog} = require('electron');
 /*
 function deleteLocalStorage() {
     localStorage.tableData = "";
@@ -173,7 +172,7 @@ function fillDataExist(){
     
         //creacion de eventos para formatear el campo virtual-preencial
         createVirtualPresencialValidation();
-        validarDuplicados();
+        //validarDuplicados();
         
     };
 };
@@ -275,7 +274,7 @@ function dataToArray(text) {
 
     //console.log (text);
 
-    const records = [];
+   // const records = [];
 
     function record (FullName, Name, Category, Radicado, Date, Time, Organo, Sala, Reserved, Virtual, Consecutivo, NewName, NameLength, Extension, Length, FinalPath) {
         this.FullName = FullName; // 0
@@ -295,7 +294,7 @@ function dataToArray(text) {
         this.Length = Length; // 14
         this.FinalPath = FinalPath; // 15
     };
-
+    
     //eliminar encabezado de typo del csv y comillas dobles
     deletedFormatHeader = text.replace('#TYPE Selected.System.IO.FileInfo\r\n"', '');
     deletedVoidCol = deletedFormatHeader.replace('\r', '');
@@ -305,23 +304,76 @@ function dataToArray(text) {
     //Creacion de objetos a partir del texto del csv
     const row = unQuotedText.split('\n');
     //console.log(row);
-
+    const registroParaValidacione = [];
+   
+    
     for (let i=0 ; i < row.length ; i++) {
 
         if (row[i] !== "") { //verifica si la fila no esta vacia, si no crear celdas y agregarlas a recods
 
             const cell = row[i].split('|');
-            const newRecord = new record(cell[0], cell[1], cell[2], cell[3], cell[4], cell[5], cell[6], cell[7], cell[8], cell[9], cell[10], cell[11], cell[12], cell[13], cell[14], cell[15]);
-            records.push(newRecord);
+            const lastDateWrite = cell[1].split('>> ') // obtiene la fecha de modificacion
+            registroParaValidacione.push({
+                FullName:cell[0],
+                Name:cell[1], 
+                Category: cell[2],
+                Radicado:cell[3],
+                Date: cell[4],
+                Time:cell[5],
+                Organo:cell[6],
+                Sala:cell[7],
+                Reserved:cell[8],
+                Virtual:cell[9],
+                Consecutivo:cell[10],
+                NewName:cell[11],
+                NameLength:cell[12],
+                Extension:cell[13],
+                Length:cell[14],
+                FinalPath:cell[15],
+                LastWritedate: lastDateWrite[1],
+            }); //llenar array con peso y fecha de mod           
+           // console.log(cell[0],cell[14])
+            //const newRecord = new record(cell[0], cell[1], cell[2], cell[3], cell[4], cell[5], cell[6], cell[7], cell[8], cell[9], cell[10], cell[11], cell[12], cell[13], cell[14], cell[15]);
+            //records.push(newRecord);
             //console.log("nombres",newRecord.Name);
             //console.log("este es",records[i]);
         };
-
     };
-
+    //console.log('arreglo', registroParaValidacione);
+    const duplicates = [];
+    const duplicatePositions = [];
+    for (let i = 0; i < registroParaValidacione.length; i++) {
+        for (let j = i + 1; j < registroParaValidacione.length; j++) {
+          if (registroParaValidacione[i].LastWritedate === registroParaValidacione[j].LastWritedate && registroParaValidacione[i].length === registroParaValidacione[j].length) {
+            duplicatePositions.push(j);
+            duplicates.push(registroParaValidacione[j])
+          }
+        }
+      }
     
+    //console.log('Elementos duplicados:', duplicates);
+    //console.log('Posiciones de elementos duplicados:', duplicatePositions);
+    const sinDuplicados = [...registroParaValidacione]
+    duplicatePositions.sort((a, b) => b - a);
+    duplicatePositions.forEach(posicion=>{
+        if (posicion >=0 && posicion < sinDuplicados.length ){
+            sinDuplicados.splice(posicion,1)
+        }
+        
+    })
+    const records = [...sinDuplicados]
+    //console.log('resultado',sinDuplicados);
+    
+    const enviarDuplicados = (duplicados) =>{
+        if (duplicados.length>=1){
+            console.log("entro a los duplicados");
+            const messageDuplicado="EXISTE ARCHIVOS DUPLICADOS, , RECUERDA QUE ESTOS DATOS SE DEBEN MOVER MANUALMENTE, A CONTINUCION TE MOSTRAREMOS DE QUE ARCHIVOS SE TRATA";
+            ipcRenderer.send('channel7', [messageDuplicado,duplicados]);
 
-    // generador de tabla HTML
+        }
+    }
+    enviarDuplicados(duplicates);
+    //generador de tabla HTML
     var html = '<table id="table-container">';
     html += '<thead id="header-container"><tr>';
 
@@ -353,7 +405,7 @@ function dataToArray(text) {
         for(let i = 1; i < records.length; i++) {
             html += '<tr>';
             for( let j in records[i] ) {
-
+                //console.log(j)
 // FullName, Name, Extension, Length, Radicado, Date, Time, Organo, Reserved, Virtual, Consecutivo, NewName, NameLength, Category, FinalPath
                 // casos para generar cada elemento HTML
                 switch (j) {
@@ -444,7 +496,7 @@ function dataToArray(text) {
                     case "FinalPath": html += '<td><textarea class="'+i+'" name="FinalPath" readonly="readonly" type="text"></textarea></td>';
                         break;
 
-                    default: html += "<td>" + records[i][j]+ "</td>";
+                    default:// html += "<td>" + records[i][j]+ "</td>";
                         break;
                 };
 
@@ -506,7 +558,7 @@ function dataToArray(text) {
 
     //fillDataExist();
     
-    validarDuplicados();
+    //validarDuplicados();
     
 
 };
@@ -670,28 +722,28 @@ function checkNewName () {
     securityBlindCopy();
 };
 
-function validarDuplicados(){
-    const pesos = document.getElementsByName("Length");
+// function validarDuplicados(){
+//     const pesos = document.getElementsByName("Length");
     
-    for (let i=1; i< pesos.length;i++){
-        const selectedClass = pesos[i].className;
-        const rowList = document.getElementsByClassName(selectedClass);
-        //console.log("el peso es_",pesos[i].value);
+//     for (let i=1; i< pesos.length;i++){
+//         const selectedClass = pesos[i].className;
+//         const rowList = document.getElementsByClassName(selectedClass);
+//         //console.log("el peso es_",pesos[i].value);
          
-        if (pesos[i].value==pesos[i-1].value){
-            console.log("duplicado",rowList);
+//         if (pesos[i].value==pesos[i-1].value){
+//             //console.log("duplicado",rowList);
             
-            rowList['Length'].style.backgroundColor = 'red' ;
-            rowList['Length'].border = "4px solid #388e3c";
-            rowList['Length'].style.borderRadius = "4px";
-           // this.parentElement.style.borderBottomColor = 'blue';
-        } 
-        else{
+//             rowList['Length'].style.backgroundColor = 'red' ;
+//             rowList['Length'].border = "4px solid #388e3c";
+//             rowList['Length'].style.borderRadius = "4px";
+//            // this.parentElement.style.borderBottomColor = 'blue';
+//         } 
+//         else{
            
-        }
-    }
+//         }
+//     }
     
-}
+// }
 
 
 
@@ -726,9 +778,9 @@ function saveDataOnLocalStorage() {
         localStorage.tableData = csv;
         localStorage.catalogPath = pathInputValue;
         //console.log("ESTO SE GUARDA"+localStorage.tableData);
-        console.log("Guardado en local storage");
+        //console.log("Guardado en local storage");
       } else {
-        console.log("Local storage NO disponible");
+       // console.log("Local storage NO disponible");
       };
 } ;
 
