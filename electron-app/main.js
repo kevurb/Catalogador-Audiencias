@@ -254,7 +254,7 @@ function createDirectoryCsv(receivedDirectory, importDateTime) {
             Start-Transcript -Append -Path "${__dirname}\\App-Catalogacion-Log.txt" 
 
             Get-ChildItem -LiteralPath "${receivedDirectory}" -Exclude directory.csv -Attributes !Directory -Recurse . | 
-            Sort-Object fullname | Select-Object FullName, ${nameVal}, Category, Radicado, ${dateVal}, ${timeVal}, Organo, Sala, Reserved, Virtual, Consecutivo, NewName, NameLength, Extension, Length, FinalPath | 
+            Sort-Object FullName | Select-Object FullName, ${nameVal}, Category, Radicado, ${dateVal}, ${timeVal}, Organo, Sala, Reserved, Virtual, Consecutivo, NewName, NameLength, Extension, Length, FinalPath | 
             Export-Csv -Force -Delimiter '|' -Encoding UTF8 -LiteralPath "${receivedDirectory}\\directory.csv"
             
         `, {'shell':'powershell.exe'}, (error, stdout, stderr) => {
