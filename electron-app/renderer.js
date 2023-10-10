@@ -367,7 +367,7 @@ function dataToArray(text) {
     const enviarDuplicados = (duplicados) =>{
         if (duplicados.length>=1){
             console.log("entro a los duplicados");
-            const messageDuplicado="EXISTE ARCHIVOS DUPLICADOS, , RECUERDA QUE ESTOS DATOS SE DEBEN MOVER MANUALMENTE, A CONTINUCION TE MOSTRAREMOS DE QUE ARCHIVOS SE TRATA";
+            const messageDuplicado="EXISTE ARCHIVOS DUPLICADOS, RECUERDA QUE ESTOS SE DEBEN MOVER MANUALMENTE, A CONTINUCION TE MOSTRAREMOS DE QUE ARCHIVOS SE TRATA";
             ipcRenderer.send('channel7', [messageDuplicado,duplicados]);
 
         }

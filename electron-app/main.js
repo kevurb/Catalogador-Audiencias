@@ -659,7 +659,7 @@ ipcMain.on('channel7', (e,args) => {
     dialog.showMessageBox({
         type: 'info',
         buttons: ['Ver Duplicados'],
-        title: 'Existen Archivos Duplicados',
+        title: 'Validación de Duplicados',
         message: alertMessage
     }).then(result => {
        if (result.response== 0 ){

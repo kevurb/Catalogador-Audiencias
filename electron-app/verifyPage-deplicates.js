@@ -11,9 +11,10 @@ function createVerifyTable (array) {
   let html = '<table id="table-container" class="verify-table">';
       html += '<thead id="header-container"><tr>';
       html += '<th class="table-header">  </th>';
-      html += '<th class="table-header">Ruta</th>';
-      html += '<th class="table-header">Nombre</th>';
       html += '<th class="table-header">Tamaño</th>';
+      html += '<th class="table-header">Ruta</th>';
+      //html += '<th class="table-header">Nombre</th>';
+      
       
       
       html += '</tr></thead>';
@@ -39,7 +40,7 @@ function createVerifyTable (array) {
             }
             html += `<td>${array.Length}</td>`;
             html += `<td class="folder-link" title="Clic para abrir en carpeta">${array.FullName}</td>`;
-            html += `<td>${array.Name}</td>`;
+            //html += `<td>${array.Name}</td>`;
             
             html += '</tr>';
 
@@ -63,9 +64,9 @@ function createVerifyTable (array) {
                       }
                       
                     }
-                html += `<td class="folder-link" title="Clic para abrir en carpeta">${element.FullName}</td>`;  
-                html += `<td>${element.Name}</td>`;
                 html += `<td>${element.Length}</td>`;
+                html += `<td class="folder-link" title="Clic para abrir en carpeta">${element.FullName}</td>`;  
+                //html += `<td>${element.Name}</td>`;
                 html += '</tr>';
             });
 
