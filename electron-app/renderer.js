@@ -339,16 +339,21 @@ function dataToArray(text) {
             //console.log("este es",records[i]);
         };
     };
-    //console.log('arreglo', registroParaValidacione);
+    
     const duplicates = [];
     const duplicatePositions = [];
     for (let i = 0; i < registroParaValidacione.length; i++) {
+        
         for (let j = i + 1; j < registroParaValidacione.length; j++) {
-          if (registroParaValidacione[i].LastWritedate === registroParaValidacione[j].LastWritedate && registroParaValidacione[i].length === registroParaValidacione[j].length) {
+           
+          if (registroParaValidacione[i].LastWritedate === registroParaValidacione[j].LastWritedate && registroParaValidacione[i].Length === registroParaValidacione[j].Length) {
+            console.log(registroParaValidacione[i].LastWritedate, registroParaValidacione[j].LastWritedate)
+            console.log(registroParaValidacione[i].Length,registroParaValidacione[j].Length) 
             duplicatePositions.push(j);
             duplicates.push(registroParaValidacione[j])
           }
         }
+        //console.log('Elementos duplicados:', duplicates[i]);
       }
     
     //console.log('Elementos duplicados:', duplicates);
@@ -367,7 +372,7 @@ function dataToArray(text) {
     const enviarDuplicados = (duplicados) =>{
         if (duplicados.length>=1){
             console.log("entro a los duplicados");
-            const messageDuplicado="EXISTE ARCHIVOS DUPLICADOS, RECUERDA QUE ESTOS SE DEBEN MOVER MANUALMENTE, A CONTINUCION TE MOSTRAREMOS DE QUE ARCHIVOS SE TRATA";
+            const messageDuplicado=`EXISTEN ${duplicados.length} ARCHIVOS DUPLICADOS, RECUERDA QUE ESTOS SE DEBEN MOVER MANUALMENTE, A CONTINUCION TE MOSTRAREMOS DE QUE ARCHIVOS SE TRATA`;
             ipcRenderer.send('channel7', [messageDuplicado,duplicados]);
 
         }
