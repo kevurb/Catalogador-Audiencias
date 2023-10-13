@@ -50,6 +50,7 @@ var juzgadosLibresObject = {
     '3107': 'penal',
     '3109': 'Penal del circuito',
     '3112': 'Civil del Circuito',
+    '3146': '',
     '3153': 'Civil',
     '3187': 'Ejecucion de penas',
     '3330': 'Admin',
