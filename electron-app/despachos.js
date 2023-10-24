@@ -4947,7 +4947,7 @@ var despachosObject = {
     '540014004009': 'Juzgado 009 Penal Municipal de Cucuta',
     '540014004014': 'Juzgado 014 Penal Municipal con Funcion de Control de Garantias de Cucuta',
     '540014009004': 'Juzgado 004 Penal Municipal con Funcion de Conocimiento de Cucuta',
-    '540014009006': 'Juzgado 004 Penal Municipal con Funcion de Conocimiento de Cucuta',
+    '540014009006': 'Juzgado 006 Penal Municipal con Funcion de Conocimiento de Cucuta',
     '540014009010': 'Juzgado 010 Penal Municipal con Funcion de Conocimiento de Cucuta',
     '540014009011': 'Juzgado 011 Penal Municipal con Funcion de Conocimiento de Cucuta',
     '540014009012': 'Juzgado 012 Penal Municipal con Funcion de Conocimiento de Cucuta',
