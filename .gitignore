@@ -1,4 +1,5 @@
 electron-app/node_modules/
+*.exe
 electron-app/out/
 electron-app/script.js
 electron-app/App-Catalogacion-Log.txt
