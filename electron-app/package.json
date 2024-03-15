@@ -1,6 +1,6 @@
 {
   "name": "app-catalogacion",
-  "version": "1.1.9",
+  "version": "1.2.1",
   "description": "Catalogador de audiencias",
   "main": "main.js",
   "scripts": {
